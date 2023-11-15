@@ -14,7 +14,7 @@ class PrestashopDevCon extends Module
         return parent::install() && $this->registerHook('displayHome');
     }
 
-    public function hookDisplayHome(): string
+    public function hookDisplayHome()
     {
         return "Hello from {$this->name}!";
     }
