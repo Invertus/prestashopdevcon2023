@@ -1,0 +1,15 @@
+{
+    "name": "invertus/prestashopdevcon",
+    "autoload": {
+        "psr-4": {
+            "Invertus\\Prestashopdevcon\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tomas",
+            "email": "tomas.ilginis@invertus.eu"
+        }
+    ],
+    "require": {}
+}
