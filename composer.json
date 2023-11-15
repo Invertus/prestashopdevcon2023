@@ -3,7 +3,12 @@
     "autoload": {
         "psr-4": {
             "Invertus\\Prestashopdevcon\\": "src/"
-        }
+        },
+        "classmap": [
+            "src/",
+            "prestashopdevcon.php",
+            "controllers"
+        ]
     },
     "authors": [
         {
