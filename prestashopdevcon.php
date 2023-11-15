@@ -25,8 +25,8 @@ class PrestashopDevCon extends Module
     {
         $text = "";
         if ($this->context->controller instanceof OrderControllerCore) {
-            $checkourProcess  =$this->context->controller->getCheckoutProcess();
-            $text .= "We are currently at step: " . $checkourProcess->getCurrentStep()->getTitle();
+            $checkoutProcess  =$this->context->controller->getCheckoutProcess();
+            $text .= "We are currently at step: " . $checkoutProcess->getCurrentStep()->getTitle();
         }
 
         return $text;
