@@ -25,5 +25,8 @@
             "email": "tomas.ilginis@invertus.eu"
         }
     ],
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "prestashop/php-dev-tools": "~3.0"
+    }
 }
