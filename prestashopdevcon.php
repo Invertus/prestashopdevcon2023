@@ -7,6 +7,8 @@ class PrestashopDevCon extends PaymentModule
         $this->name = 'prestashopdevcon';
         $this->author = 'Invertus';
         parent::__construct();
+
+        include_once "{$this->getLocalPath()}vendor/autoload.php";
     }
 
     public function install()
