@@ -1,6 +1,6 @@
 <?php
 
-class PrestashopDevCon extends Module
+class PrestashopDevCon extends PaymentModule
 {
     public function __construct()
     {
