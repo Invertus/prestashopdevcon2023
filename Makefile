@@ -15,5 +15,5 @@ run-integration-tests:
 run-tests-github-actions:
 	make run-ps ps_instance=${ps_instance} platform=linux/amd64
 	make run-wiremock ps_instance=${ps_instance}
-	sleep 1m
+	sleep 2m
 	make run-integration-tests ps_instance=${ps_instance}
