@@ -25,6 +25,6 @@ jobs:
             key: php-composer-cache
 
       -   run: sudo composer self-update 2.2.11
-
+      -   run: cp .env.dist .env
       -   run: composer install
       -   run: make run-tests-github-actions ps_instance=${{ matrix.presta-versions }}
