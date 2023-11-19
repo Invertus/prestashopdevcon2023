@@ -1,5 +1,6 @@
 <?php
 
+use Dotenv\Dotenv;
 use Invertus\Prestashopdevcon\ServiceProvider\ServiceProvider;
 
 class PrestashopDevCon extends PaymentModule
@@ -9,20 +10,27 @@ class PrestashopDevCon extends PaymentModule
         $this->name = 'prestashopdevcon';
         $this->author = 'Invertus';
         parent::__construct();
-
-        include_once "{$this->getLocalPath()}vendor/autoload.php";
     }
 
     public function install()
     {
         return parent::install()
             && $this->registerHook('displayHome')
-            && $this->registerHook('displayCheckoutSummaryTop');
+            && $this->registerHook('displayCheckoutSummaryTop')
+            && $this->registerHook('actionDispatcherBefore');
     }
 
     public function get($serviceName)
     {
         return (new ServiceProvider())->getService($serviceName);
+    }
+
+    public function hookActionDispatcherBefore()
+    {
+        include_once "{$this->getLocalPath()}vendor/autoload.php";
+
+        $dotenv = Dotenv::createImmutable($this->getLocalPath());
+        $dotenv->load();
     }
 
     public function hookDisplayHome()

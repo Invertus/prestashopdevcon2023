@@ -1,1 +1,1 @@
-{"version":1,"defects":{"Invertus\\Tests\\Prestashopdevcon\\Integration\\PaymentTest::testGetCardNames":4},"times":{"Invertus\\Tests\\Prestashopdevcon\\Integration\\PaymentTest::testGetCardNames":0.064000000000000001}}
+{"version":1,"defects":{"Invertus\\Tests\\Prestashopdevcon\\Integration\\PaymentTest::testGetCardNames":4},"times":{"Invertus\\Tests\\Prestashopdevcon\\Integration\\PaymentTest::testGetCardNames":0.186}}

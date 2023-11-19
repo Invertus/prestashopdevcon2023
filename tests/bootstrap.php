@@ -17,4 +17,9 @@ if (class_exists(AppKernel::class)) {
     $kernel = new AppKernel('dev', _PS_MODE_DEV_);
     $kernel->boot();
 }
+
+$module = Module::getInstanceByName('prestashopdevcon');
+
+$module->hookActionDispatcherBefore();
+
 // any actions to apply before any given tests can be done here
