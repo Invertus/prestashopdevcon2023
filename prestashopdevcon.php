@@ -41,7 +41,7 @@ class PrestashopDevCon extends PaymentModule
     public function hookDisplayCheckoutSummaryTop()
     {
         $text = "";
-        if ($this->context->controller instanceof OrderControllerCore) {
+        if ($this->context->controller instanceof OrderControllerCore && method_exists($this->context->controller, 'getCheckoutProcess')) {
             $checkoutProcess = $this->context->controller->getCheckoutProcess();
             $text .= "We are currently at step: " . $checkoutProcess->getCurrentStep()->getTitle();
         }

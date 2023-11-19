@@ -3,7 +3,7 @@ on: [pull_request]
 
 jobs:
   #    similar job as below. Editing this one don't forget the one below
-  unit-system-tests-17:
+  unit-system-tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
