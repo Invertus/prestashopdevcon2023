@@ -11,3 +11,9 @@ run-wiremock:
 run-integration-tests:
 	docker exec -i some-prestashop-${ps_instance} sh -c "cd /var/www/html && php bin/console prestashop:module reset prestashopdevcon"
 	docker exec -i some-prestashop-${ps_instance} sh -c "cd /var/www/html/modules/prestashopdevcon && php vendor/bin/phpunit -c tests/phpunit.xml --testsuite Integration"
+
+run-tests-github-actions:
+	make run-ps ps_instance=${ps_instance} platform=linux/amd64
+	make run-wiremock ps_instance=${ps_instance}
+	sleep 1m
+	make run-integration-tests ps_instance=${ps_instance}

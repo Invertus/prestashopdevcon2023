@@ -1,0 +1,30 @@
+name: PHP tests
+on: [pull_request]
+
+jobs:
+  #    similar job as below. Editing this one don't forget the one below
+  unit-system-tests-17:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        presta-versions: ['1.7.8.0-7.4', 'latest']
+    steps:
+      -   name: Checkout
+          uses: actions/checkout@v2.0.0
+
+      -   name: Cache vendor folder
+          uses: actions/cache@v1
+          with:
+            path: vendor
+            key: php-${{ hashFiles('composer.lock') }}
+
+      -   name: Cache composer folder
+          uses: actions/cache@v1
+          with:
+            path: ~/.composer/cache
+            key: php-composer-cache
+
+      -   run: sudo composer self-update 2.2.11
+
+      -   run: composer install
+      -   run: make run-tests-github-actions ps_instance=${{ matrix.presta-versions }}
