@@ -25,7 +25,11 @@
             "email": "tomas.ilginis@invertus.eu"
         }
     ],
-    "require": {},
+    "require": {
+        "league/container": "2.5.0",
+        "apimatic/jsonmapper": "^2.0",
+        "apimatic/unirest-php": "^2.1"
+    },
     "require-dev": {
         "prestashop/php-dev-tools": "~3.0"
     }
