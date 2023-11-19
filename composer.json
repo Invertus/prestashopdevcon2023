@@ -3,7 +3,21 @@
     "autoload": {
         "psr-4": {
             "Invertus\\Prestashopdevcon\\": "src/"
-        }
+        },
+        "classmap": [
+            "src/",
+            "prestashopdevcon.php",
+            "controllers"
+        ]
+    },
+    "config": {
+        "platform": {
+            "php": "5.6.0"
+        },
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true,
+        "prepend-autoloader": false
     },
     "authors": [
         {
@@ -11,5 +25,8 @@
             "email": "tomas.ilginis@invertus.eu"
         }
     ],
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "prestashop/php-dev-tools": "~3.0"
+    }
 }

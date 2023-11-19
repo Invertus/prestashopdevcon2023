@@ -1,12 +1,14 @@
 <?php
 
-class PrestashopDevCon extends Module
+class PrestashopDevCon extends PaymentModule
 {
     public function __construct()
     {
         $this->name = 'prestashopdevcon';
         $this->author = 'Invertus';
         parent::__construct();
+
+        include_once "{$this->getLocalPath()}vendor/autoload.php";
     }
 
     public function install()
@@ -25,7 +27,7 @@ class PrestashopDevCon extends Module
     {
         $text = "";
         if ($this->context->controller instanceof OrderControllerCore) {
-            $checkoutProcess  =$this->context->controller->getCheckoutProcess();
+            $checkoutProcess = $this->context->controller->getCheckoutProcess();
             $text .= "We are currently at step: " . $checkoutProcess->getCurrentStep()->getTitle();
         }
 
