@@ -14,7 +14,11 @@ final class ServiceProvider implements ServiceProviderInterface
             new ReflectionContainer()
         );
 
+        (new ServiceContainer())->register($container);
 
+        if ($_ENV['app_env'] === 'ci') {
+            (new TestServiceContainer())->register($container);
+        }
 
         return $container->get((string) $serviceName);
     }

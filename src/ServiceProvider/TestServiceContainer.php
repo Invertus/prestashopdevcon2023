@@ -6,12 +6,12 @@ use Invertus\Prestashopdevcon\PaymentApiClient\PaymentApiClient;
 use Invertus\Prestashopdevcon\PaymentApiClient\PaymentApiClientInterface;
 use League\Container\Container;
 
-class ServiceContainer
+class TestServiceContainer
 {
     public function register(Container $container)
     {
         $container->add(PaymentApiClientInterface::class, function () {
-            return new PaymentApiClient("https://dummy.restapiexample.com/");
+            return new PaymentApiClient("http://172.17.0.1:8443");
         });
     }
 }
