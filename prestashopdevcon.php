@@ -1,5 +1,7 @@
 <?php
 
+use Invertus\Prestashopdevcon\ServiceProvider\ServiceProvider;
+
 class PrestashopDevCon extends PaymentModule
 {
     public function __construct()
@@ -16,6 +18,11 @@ class PrestashopDevCon extends PaymentModule
         return parent::install()
             && $this->registerHook('displayHome')
             && $this->registerHook('displayCheckoutSummaryTop');
+    }
+
+    public function get($serviceName)
+    {
+        return (new ServiceProvider())->getService($serviceName);
     }
 
     public function hookDisplayHome()

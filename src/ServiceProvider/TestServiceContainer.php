@@ -11,7 +11,7 @@ class TestServiceContainer
     public function register(Container $container)
     {
         $container->add(PaymentApiClientInterface::class, function () {
-            return new PaymentApiClient("http://172.17.0.1:8443");
+            return new PaymentApiClient("http://host.docker.internal:8443");
         });
     }
 }

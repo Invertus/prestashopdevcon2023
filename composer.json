@@ -10,9 +10,14 @@
             "controllers"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Invertus\\Tests\\Prestashopdevcon\\": "tests/"
+        }
+    },
     "config": {
         "platform": {
-            "php": "5.6.0"
+            "php": "7.4.0"
         },
         "sort-packages": true,
         "preferred-install": "dist",
@@ -31,6 +36,7 @@
         "apimatic/unirest-php": "^2.1"
     },
     "require-dev": {
-        "prestashop/php-dev-tools": "~3.0"
+        "phpunit/phpunit": "~9.6.13",
+        "prestashop/php-dev-tools": "~4.0"
     }
 }
