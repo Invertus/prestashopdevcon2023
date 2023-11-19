@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/pay",
+    "bodyPatterns" : [ {
+      "equalToJson" : { "amount": 0 }
+    } ]
+  },
+  "response": {
+    "status": 400,
+    "bodyFileName": "pay/pay-fail.json"
+  }
+}

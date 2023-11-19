@@ -41,13 +41,12 @@ final class PaymentApiClient implements PaymentApiClientInterface
         $response = Request::post(
             "{$this->baseUrl}/pay",
             [
-                [
-                    "Content-Type" => "application/json"
-                ]
+                "Content-Type" => "application/json",
+                'Accept' => 'application/json',
             ],
-            [
+            json_encode([
                 "amount" => $amount
-            ]
+            ])
         );
 
         if ($response->code !== 201) {

@@ -4,7 +4,7 @@ namespace Invertus\Prestashopdevcon\Services;
 
 use Invertus\Prestashopdevcon\PaymentApiClient\PaymentApiClientInterface;
 
-class PaymentProvider
+class PaymentHandler
 {
     /**
      * @var PaymentApiClientInterface
@@ -16,11 +16,10 @@ class PaymentProvider
         $this->apiClient = $apiClient;
     }
 
-    public function getCardNames()
+
+    public function createPayment($amountCents)
     {
         // in real app, some prestashop logic should be located here
-        $cards = $this->apiClient->getCreditCards();
-
-        return array_map(function ($item) { return $item['name']; }, $cards);
+        return $this->apiClient->pay($amountCents);
     }
 }
