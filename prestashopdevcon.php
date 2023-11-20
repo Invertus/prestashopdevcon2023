@@ -1,5 +1,8 @@
 <?php
 
+use Dotenv\Dotenv;
+use Invertus\Prestashopdevcon\ServiceProvider\ServiceProvider;
+
 class PrestashopDevCon extends PaymentModule
 {
     public function __construct()
@@ -7,15 +10,27 @@ class PrestashopDevCon extends PaymentModule
         $this->name = 'prestashopdevcon';
         $this->author = 'Invertus';
         parent::__construct();
-
-        include_once "{$this->getLocalPath()}vendor/autoload.php";
     }
 
     public function install()
     {
         return parent::install()
             && $this->registerHook('displayHome')
-            && $this->registerHook('displayCheckoutSummaryTop');
+            && $this->registerHook('displayCheckoutSummaryTop')
+            && $this->registerHook('actionDispatcherBefore');
+    }
+
+    public function get($serviceName)
+    {
+        return (new ServiceProvider())->getService($serviceName);
+    }
+
+    public function hookActionDispatcherBefore()
+    {
+        include_once "{$this->getLocalPath()}vendor/autoload.php";
+
+        $dotenv = Dotenv::createImmutable($this->getLocalPath());
+        $dotenv->load();
     }
 
     public function hookDisplayHome()
@@ -26,7 +41,7 @@ class PrestashopDevCon extends PaymentModule
     public function hookDisplayCheckoutSummaryTop()
     {
         $text = "";
-        if ($this->context->controller instanceof OrderControllerCore) {
+        if ($this->context->controller instanceof OrderControllerCore && method_exists($this->context->controller, 'getCheckoutProcess')) {
             $checkoutProcess = $this->context->controller->getCheckoutProcess();
             $text .= "We are currently at step: " . $checkoutProcess->getCurrentStep()->getTitle();
         }
