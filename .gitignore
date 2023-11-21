@@ -3,3 +3,4 @@ vendor
 .env
 node_modules
 composer.lock
+cypress/videos/*

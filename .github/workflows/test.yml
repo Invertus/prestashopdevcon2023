@@ -3,7 +3,7 @@ on: [pull_request]
 
 jobs:
   #    similar job as below. Editing this one don't forget the one below
-  unit-system-tests:
+  unit-system-e2e-tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,4 +27,17 @@ jobs:
       -   run: sudo composer self-update 2.2.11
       -   run: cp .env.dist .env
       -   run: composer install
+#          integration tests
       -   run: make run-tests-github-actions ps_instance=${{ matrix.presta-versions }}
+#          e2e tests
+      -   run: apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+      -   run: npm install
+      -   run: npx cypress run
+
+      - name: Archive videos and screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: videos and screenshots
+          path: |
+            ./cypress/videos
+            ./cypress/screenshots
