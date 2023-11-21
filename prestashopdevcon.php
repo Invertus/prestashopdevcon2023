@@ -2,6 +2,7 @@
 
 use Dotenv\Dotenv;
 use Invertus\Prestashopdevcon\ServiceProvider\ServiceProvider;
+use Invertus\Prestashopdevcon\Services\PaymentProvider;
 
 class PrestashopDevCon extends PaymentModule
 {
@@ -17,7 +18,8 @@ class PrestashopDevCon extends PaymentModule
         return parent::install()
             && $this->registerHook('displayHome')
             && $this->registerHook('displayCheckoutSummaryTop')
-            && $this->registerHook('actionDispatcherBefore');
+            && $this->registerHook('actionDispatcherBefore')
+            && $this->registerHook('displayShoppingCartFooter');
     }
 
     public function get($serviceName)
@@ -27,8 +29,7 @@ class PrestashopDevCon extends PaymentModule
 
     public function hookActionDispatcherBefore()
     {
-        include_once "{$this->getLocalPath()}vendor/autoload.php";
-
+        include_once _PS_MODULE_DIR_ . $this->name . '/' . "vendor/autoload.php";
         $dotenv = Dotenv::createImmutable($this->getLocalPath());
         $dotenv->load();
     }
@@ -47,5 +48,17 @@ class PrestashopDevCon extends PaymentModule
         }
 
         return $text;
+    }
+
+    public function hookDisplayShoppingCartFooter()
+    {
+        /** @var PaymentProvider $paymentProvider */
+        $paymentProvider = $this->get(PaymentProvider::class);
+
+        $this->context->smarty->assign([ "creditCardsNames" => $paymentProvider->getCardNames()]);
+
+        return $this->context->smarty->fetch(
+            "{$this->getLocalPath()}/views/templates/cartFooter.tpl"
+        );
     }
 }
