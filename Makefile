@@ -14,8 +14,12 @@ reset-module:
 run-wiremock:
 	docker run -d -ti --rm --name wiremock-${ps_instance} --network prestashop-net-${ps_instance} -v $(ROOT_DIR)/wiremock:/home/wiremock -p 8443:8080 wiremock/wiremock
 
+change-permissions:
+	docker exec -i some-prestashop-${ps_instance} sh -c "chmod -R 777 /var/www/html"
+
 run-integration-tests:
 	make install-module
+	make change-permissions
 	docker exec -i some-prestashop-${ps_instance} sh -c "cd /var/www/html/modules/prestashopdevcon && php vendor/bin/phpunit -c tests/phpunit.xml --testsuite Integration"
 
 run-tests-github-actions:
