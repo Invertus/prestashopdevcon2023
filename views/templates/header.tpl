@@ -1,0 +1,1 @@
+<script type="module" src="https://cdn.skypack.dev/invertus-prestashopdevcon2023-sample"></script>

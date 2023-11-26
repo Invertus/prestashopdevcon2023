@@ -19,12 +19,20 @@ class PrestashopDevCon extends PaymentModule
             && $this->registerHook('displayHome')
             && $this->registerHook('displayCheckoutSummaryTop')
             && $this->registerHook('actionDispatcherBefore')
-            && $this->registerHook('displayShoppingCartFooter');
+            && $this->registerHook('displayShoppingCartFooter')
+            && $this->registerHook('header');
     }
 
     public function get($serviceName)
     {
         return (new ServiceProvider())->getService($serviceName);
+    }
+
+    public function hookHeader()
+    {
+        return $this->context->smarty->fetch(
+            "{$this->getLocalPath()}/views/templates/header.tpl"
+        );
     }
 
     public function hookActionDispatcherBefore()
@@ -36,7 +44,9 @@ class PrestashopDevCon extends PaymentModule
 
     public function hookDisplayHome()
     {
-        return "Hello from {$this->name}!";
+        return $this->context->smarty->fetch(
+            "{$this->getLocalPath()}/views/templates/home.tpl"
+        );
     }
 
     public function hookDisplayCheckoutSummaryTop()
